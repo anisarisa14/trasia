@@ -1,0 +1,874 @@
+{% extends "base.html" %} {% block title %}PLACE DETAILS{% endblock %} {% block content%}
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<style>
+    .btn {
+      background-color: DodgerBlue;
+      border: none;
+      color: white;
+      padding: 10px 10px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    
+    /* Darker background on mouse-over */
+    .btn:hover {
+      background-color: RoyalBlue;
+      color: rgb(248, 188, 225);
+    }
+    
+    *{
+        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+    }
+    body{
+        font-family: Helvetica;
+        -webkit-font-smoothing: antialiased;
+        background: rgba(173, 221, 248, 0.644);
+    }
+    h2{
+        text-align: center;
+        font-size: 18px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        color: white;
+        padding: 30px 0;
+    }
+    
+    /* Table Styles */
+    
+    .table-wrapper{
+        margin: 10px 70px 70px;
+        box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+    }
+    
+    .fl-table {
+        border-radius: 5px;
+        font-size: 12px;
+        font-weight: normal;
+        border: none;
+        border-collapse: collapse;
+        width: 100%;
+        max-width: 100%;
+        white-space: nowrap;
+        background-color: white;
+    }
+    
+    .fl-table td, .fl-table th {
+        text-align: center;
+        padding: 8px;
+    }
+    
+    .fl-table td {
+        border-right: 1px solid #f8f8f8;
+        font-size: 12px;
+    }
+    
+    .fl-table thead th {
+        color: #ffffff;
+        background: #4FC3A1;
+    }
+    
+    
+    .fl-table thead th:nth-child(odd) {
+        color: #ffffff;
+        background: #324960;
+    }
+    
+    .fl-table tr:nth-child(even) {
+        background: #c70808;
+    }
+    
+    
+    
+    
+    /* Float cancel and delete buttons and add an equal width */
+    .cancelbtn, .deletebtn {
+      float: left;
+      width: 50%;
+    }
+    
+    /* Add a color to the cancel button */
+    .cancelbtn {
+      background-color: #ccc;
+      color: black;
+    }
+    
+    /* Add a color to the delete button */
+    .deletebtn {
+      background-color: #f44336;
+    }
+    
+    
+    
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: #474e5d;
+      padding-top: 50px;
+    }
+    
+    /* Modal Content/Box */
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+      border: 1px solid #888;
+      width: 80%; /* Could be more or less, depending on screen size */
+    }
+    
+    /* Style the horizontal ruler */
+    hr {
+      border: 1px solid #f1f1f1;
+      margin-bottom: 25px;
+    }
+     
+    /* The Modal Close Button (x) */
+    .close {
+      position: absolute;
+      right: 35px;
+      top: 15px;
+      font-size: 40px;
+      font-weight: bold;
+      color: #f1f1f1;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #f44336;
+      cursor: pointer;
+    }
+    
+    /* Clear floats */
+    .clearfix::after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+    
+    /* Change styles for cancel button and delete button on extra small screens */
+    @media screen and (max-width: 300px) {
+      .cancelbtn, .deletebtn {
+         width: 100%;
+      }
+    }
+    
+    .card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 1000px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+
+
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+
+
+
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  font-size: 15px;
+  font-family: "Helvetica Neue",Helvetica,Arial;
+  color: black;
+}
+
+tr:nth-child(even) 
+{background-color: #e8cff8;
+}
+
+tr:nth-child(odd) 
+{background-color: #f2e7f8c4;
+}
+
+
+
+
+body {
+background: #DFC2F2;
+	background-image: linear-gradient( to right, #ffffb3,#ffe6e6);
+	background-attachment: fixed;	
+	background-size: cover;
+  
+	}
+
+#container{
+	box-shadow: 0 15px 30px 1px grey;
+	background: rgba(255, 255, 255, 0.90);
+	text-align: center;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: 5em auto;
+	width: 100%;
+  
+	
+}
+
+
+
+.product-details {
+	/* position: relative;
+	text-align: left;
+	overflow: hidden;
+	padding: 30px;
+	height: 100%;
+	float: left;
+	width: 50%; */
+
+  background-color: #ffffff;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  /* border: 10px solid rgb(95, 23, 73); */
+  width: 75%; /* Could be more or less, depending on screen size */
+  height: 100%; /* Full height */
+
+}
+
+#container .product-details h1{
+	font-family: 'Bebas Neue', cursive;
+	display: inline-block;
+	position: relative;
+	font-size: 30px;
+	color: #344055;
+	margin: 0;
+	
+}
+
+#container .product-details h1:before{
+	position: absolute;
+	content: '';
+	right: 0%; 
+	top: 0%;
+	transform: translate(25px, -15px);
+	font-family: 'Bree Serif', serif;
+	display: inline-block;
+	background: #ffe6e6;
+	border-radius: 5px;
+	font-size: 14px;
+	padding: 5px;
+	color: white;
+	margin: 0;
+	animation: chan-sh 6s ease infinite;
+
+}
+
+
+
+	
+
+
+.hint-star {
+	display: inline-block;
+	
+	color: gold;
+	width: 75%;
+    font-size: 30px;
+}
+
+
+#container .product-details > p {
+font-family: 'EB Garamond', serif;
+	text-align: center;
+	font-size: 18px;
+	color: #7d7d7d;
+	
+}
+.control{
+	position: absolute;
+	bottom: 5%;
+	left: 33%;
+	
+}
+.btn {
+
+	transform: translateY(0px);
+	transition: 0.3s linear;
+	background:  #809fff;
+	border-radius: 5px;
+    position: relative;
+    overflow: hidden;
+	cursor: pointer;
+	outline: none;
+	border: none;
+	color: #eee;
+	padding: 0;
+	margin: 0;
+	
+}
+
+.btn:hover{transform: translateY(-6px);
+	background: #1a66ff;}
+
+.btn span {
+	font-family: 'Farsan', cursive;
+	transition: transform 0.3s;
+	display: inline-block;
+  padding: 10px 20px;
+	font-size: 1.2em;
+	margin:0;
+	
+}
+.btn .price, .shopping-cart{
+	background: #333;
+	border: 0;
+	margin: 0;
+}
+
+.btn .price {
+	transform: translateX(-10%); padding-right: 15px;
+}
+
+.btn .shopping-cart {
+	transform: translateX(-100%);
+  position: absolute;
+	background: #333;
+	z-index: 1;
+  left: 0;
+  top: 0;
+}
+
+.btn .buy {z-index: 3; font-weight: bolder;}
+
+.btn:hover .price {transform: translateX(-110%);}
+
+.btn:hover .shopping-cart {transform: translateX(0%);}
+
+
+
+.product-image {
+	transition: all 0.3s ease-out;
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+	height: 100%;
+	float: right;
+	width: 45%;
+	display: inline-block;
+}
+
+#container img {
+    width: 100%;
+    height: 100%;
+}
+
+.info {
+    background: rgba(27, 26, 26, 0.9);
+    font-family: 'Bree Serif', serif;
+    transition: all 0.3s ease-out;
+    transform: translateX(-100%);
+    position: absolute;
+    line-height: 1.8;
+    text-align: left;
+    font-size: 105%;
+    cursor: no-drop;
+    color: #FFF;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+.info h2 {text-align: center}
+.product-image:hover .info{transform: translateX(0);}
+
+.info ul li{transition: 0.3s ease;}
+.info ul li:hover{transform: translateX(50px) scale(1.3);}
+
+.product-image:hover img {transition: all 0.3s ease-out;}
+.product-image:hover img {transform: scale(1.2, 1.2);}
+
+
+h1 { 
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: "Arial";
+  font-size: 50px;
+  color: blueviolet;
+}
+
+.title {
+  color: rgb(17, 146, 45);
+  font-size: 30px;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+
+
+/* Rate Star*/        
+.result-container{
+        width: 100px; height: 22px;
+        background-color: rgb(114, 10, 10);
+        vertical-align:middle;
+        display:inline-block;
+        position: relative;
+        top: -4px;
+    }
+    .rate-stars{
+        width: 100px; height: 22px;
+        background: url(../static/images/star.png) no-repeat;
+        background-size: cover;
+        position: absolute;
+    }
+    .rate-bg{
+        width: 100px;
+        height: 22px;
+        background-color: #ffbe10;
+        position: absolute;
+    }
+    /* Rate Star Ends*/
+    
+    /* Display rate count */    
+    .reviewCount, .reviewScore {font-size: 14px; color: #5fcf49; margin-left: 5px;}
+    .reviewScore {font-weight: 600;}
+    /* Display rate count Ends*/      
+    
+    .clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+
+
+
+
+
+
+
+.stars input {
+    position: absolute;
+    left: -999999px;
+}
+
+.stars a {
+    display: inline-block;
+    padding-right:4px;
+    text-decoration: none;
+    margin:0;
+}
+
+.stars a:after {
+    position: relative;
+    font-size: 18px;
+    font-family: 'FontAwesome', serif;
+    display: block;
+    content: "\f005";
+    color: #9e9e9e;
+}
+
+
+span {
+  font-size: 0; /* trick to remove inline-element's margin */
+}
+
+.stars a:hover ~ a:after{
+  color: #9e9e9e !important;
+}
+span.active a.active ~ a:after{
+  color: #9e9e9e;
+}
+
+span:hover a:after{
+  color:blue !important;
+}
+
+span.active a:after,
+.stars a.active:after{
+  color:blue;
+}
+
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.75em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+
+
+.center2 {
+  margin: auto;
+  width: 35%;
+  padding: 25px;
+}
+
+textarea {
+  background: url(images/benice.png) center center no-repeat; /* This ruins default border */
+  border: 1px solid #888; 
+  outline: #4FC3A1;
+  color: black;
+  font-family: 'Arial', Arial, sans-serif;
+  font-size: 17px;
+}
+
+
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 25%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive columns */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+
+/* Pen-specific styles */
+* {
+  box-sizing: border-box;
+}
+html, body, section, div {
+  height: 100%;
+}
+
+body { 
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  line-height: 150%;
+  text-align: center;
+  /* text-shadow: 0 2px 2px #b6701e; */
+}
+
+section {
+  width: 100%;
+}
+
+article {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  padding: 1rem;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin: 0 0 0.75rem 0;
+}
+
+/* Pattern styles */
+.left-half {
+  background-color: #ffffff;
+  float: left;
+  width: 55%;
+  height: auto;
+  box-shadow: 0 15px 30px 1px grey;
+	text-align: center;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: 5em auto;  
+  padding: 10px 10px;
+}
+.right-half {
+  background-color: rgba(255, 255, 255, 0.938);
+  float: left;
+  width: 45%;
+  height: auto;
+  box-shadow: 0 15px 30px 1px grey;
+	text-align: center;
+	border-radius: 5px;
+	overflow: hidden;
+	margin: 5em auto;  
+  padding: 10px 10px;
+}
+</style>
+    
+
+
+<section class="container">
+  <div class="left-half">
+	  <form method="post">
+    <div class="clearfix">
+      <img style="float: right;
+      width:  300px;
+      height: 300px;
+      object-fit: cover;" style="box-shadow: 10px 10px 10px grey;" src="{{ posts.image1_img }}">
+      <br><br><br><br><h1 style='font-family: "Backslash";font-size: 35px;color: rgb(20, 150, 202);'>{{posts.place_name}}</h1>
+      <br><br><br>
+      <div class="result-container">       
+        <div class="rate-bg" style="width: calc(20% * {{ posts.place_rating }})"></div>
+        <div class="rate-stars"></div>
+    </div>
+    <label style="font-size:17px; font-family: 'Courier New', 'Arial Narrow', Arial, sans-serif;">{{ posts.place_rating }}</label>
+    </div>
+
+    <br>
+    <div style="margin-top: 10px">     
+      
+    
+        <br><br>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>PHONE NUMBER</p>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(161, 109, 172);'>{{ posts.place_phoneNum }}<br><br>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>ADDRESS</p>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(202, 143, 156);'>{{ posts.place_address }}</p><br>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>E-MAIL</p>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(161, 109, 172);'>{{ posts.place_email }}</p><br>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>WEBSITE</p>
+    
+        {% if posts.place_website != "None" %}
+            <a href="{{ posts.place_website }}">
+                <i><p style='text-align: center;font-family: "Gill Sans MT Condensed";font-size: 22px;color: rgb(202, 143, 156);'>
+                    Click Here to go to their Website
+                </p></i>
+            </a>
+        {% else %}
+            <i><p style='text-align: right;text-align: center;font-family: "Gill Sans MT Condensed";font-size: 22px;color: rgb(202, 143, 156);'>
+                None
+            </p></i>
+        {% endif %}
+
+        <br><br>
+
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>OPERATING HOUR</p>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(161, 109, 172);'>{{ posts.place_operatingHour }}</p><br>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>KEYWORD</p>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(202, 143, 156);'>{{ posts.place_keyword }}</p><br>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>ATTRACTION</p>
+        <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(161, 109, 172);'>{{ posts.place_attractions }}</p><br>
+       
+        <!-- <button style="background:royalblue;color:white; font-family: Arial, Helvetica, sans-serif; font-size:14px;" onclick="history.back()">GO BACK</button> -->
+			
+    </div>
+	</form>
+
+  <form method="post" action="/rate_place">
+        <input type="text" name="rate_type" value="PLACE" hidden>
+        <input type="text" name="id_attraction" value="{{ posts.place_id }}" hidden>
+        <input type="text" name="place_name" value="{{posts.place_name}}" hidden>
+
+        <br><br>
+        
+        <div class="form-group">
+          
+          <input type="text" id="seeAnotherField" name="status" value="{{rate_status}}" hidden>
+        </div>
+        
+        <label style='font-family: Hashed Browns;font-size: 15px;color: rgba(1, 46, 49, 0.829);'>
+          --------------------------------------------------------------------------<br>
+        </label><br><br>
+
+        <div class="form-group" id="otherFieldDiv">
+          <p style='font-family: Hashed Browns;font-size: 40px;color: rgba(68, 67, 27, 0.829);'>RATE THIS ATTRACTION !</p>
+          <br>
+          <label for="otherField" style='font-family: Hashed Browns;font-size: 30px;color: rgba(221, 217, 1, 0.829);'>Rate this place :</label>
+            
+          <div class="center2">
+          <fieldset class="rating">
+              <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+              <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+              <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Neutral - 3 stars"></label>
+              <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Not so bad - 2 stars"></label>
+              <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Bad - 1 star"></label>
+          </fieldset>
+          </div>
+          <br><br>
+          
+            <p style='font-family: Hashed Browns;font-size: 30px;color: rgba(221, 217, 1, 0.829);'>LEAVE YOUR REVIEW!</p>
+            <textarea id="review" name="review" rows="5" cols="60%"></textarea>
+            <br><br>
+          <button style="background:royalblue;color:white; font-family: Arial, Helvetica, sans-serif; font-size:14px;">RATE NOW!</button>
+          
+        </div>
+        
+        <div class="form-group" id="otherFieldGroupDiv">
+          <label for="otherField" style='font-family: Hashed Browns;font-size: 30px;color: rgba(36, 35, 17, 0.829);'>You have rated this place with {{rate_status.rating}} &#127775; !</label>
+             <br><br>
+          
+          <div class="result-container">       
+            <div class="rate-bg" style="width: calc(20% * {{rate_status.rating}})"></div>
+            <div class="rate-stars"></div>
+          </div>
+          <br><br>
+          <label for="otherField" style='font-family: Hashed Browns;font-size: 30px;color: rgba(36, 35, 17, 0.829);'>Your reviews:</label><br>
+          <label for="otherField" style='font-family: Cambria;font-size: 20px;color: rgba(231, 178, 1, 0.829);'>{{rate_status.review}}</label>
+
+          <br><br><br><br>
+          <button type="button" style="background:royalblue;color:white; font-family: Arial, Helvetica, sans-serif; font-size:14px;" onclick="history.back()">GO BACK</button><br><br>
+        </div>
+        
+
+    </form>
+  </div>
+
+  <div class="right-half">
+	  <form>
+      <h1 style='font-family: Hashed Browns;font-size: 30px;'>REVIEW FROM OTHER USERS</h1><br><br>
+    <div class="clearfix">
+      <div style="overflow-x: auto;">
+        <table>
+          {% for item in review %}
+          <tr>
+            <td>
+                {% for items in users %}
+                  {% if items.id == item.user_id %}
+                    {{ items.email }}
+                  {% endif %}
+                {% endfor %}              
+            </td>
+            <td>{{ item.rating }} &#127775;</td>
+            <td><textarea id="review" name="review" rows="5" cols="60" maxlength="70">{{ item.review }} </textarea></td>
+            <td>{{ item.rate_date }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+    </div>
+
+    <br>
+    
+	</form>
+  </div>
+</section>
+
+
+<script>
+
+var rate = 0;
+ 
+ 
+ $('.stars a').on('click', function(){
+  $('.stars span, .stars a').removeClass('active');
+
+  $(this).addClass('active');
+  $('.stars span').addClass('active');
+});
+
+
+$("#seeAnotherField").change(function() {
+  if ($(this).val() == "None") {
+    $('#otherFieldDiv').show();
+    $('#otherFieldGroupDiv').hide();
+    $('#otherField').attr('required', '');
+    $('#otherField').attr('data-error', 'This field is required.');
+  } else {
+    $('#otherFieldDiv').hide();
+    $('#otherFieldGroupDiv').show();
+    $('#otherField').removeAttr('required');
+    $('#otherField').removeAttr('data-error');
+  }
+});
+$("#seeAnotherField").trigger("change");
+
+$("#seeAnotherFieldGroup").change(function() {
+  if ($(this).val() == "yes") {
+    $('#otherFieldGroupDiv').show();
+    $('#otherField1').attr('required', '');
+    $('#otherField1').attr('data-error', 'This field is required.');
+    $('#otherField2').attr('required', '');
+    $('#otherField2').attr('data-error', 'This field is required.');
+  } else {
+    $('#otherFieldGroupDiv').hide();
+    $('#otherField1').removeAttr('required');
+    $('#otherField1').removeAttr('data-error');
+    $('#otherField2').removeAttr('required');
+    $('#otherField2').removeAttr('data-error');
+  }
+});
+$("#seeAnotherFieldGroup").trigger("change");
+
+
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,711 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<style>
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  height: 40px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+  color: rgb(248, 188, 225);
+}
+
+
+.btn2 {
+  background-color: rgb(56, 255, 30);
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  height: 40px;
+  width: 75px;
+}
+
+/* Darker background on mouse-over */
+.btn2:hover {
+  background-color: RoyalBlue;
+  color: rgb(248, 188, 225);
+}
+
+
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+body{
+    font-family: Helvetica;
+    -webkit-font-smoothing: antialiased;
+    background: rgba(155, 80, 61, 0.644);
+}
+h2{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+
+/* Table Styles */
+.table-wrapper{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+   
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 4px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+        margin-left: auto; 
+        margin-right: auto;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 1px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
+
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+.container {
+  padding: 1px;
+  text-align: center;
+}
+
+
+
+.modalMyho{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1200; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-size: 1000px;
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #004ff8;
+  padding-top: 50px;
+  opacity: 100%;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid rgb(255, 0, 0);
+  width: 80%; /* Could be more or less, depending on screen size */
+  height: 100%; /* Full height */
+}
+
+/* The Modal (background) */
+.modal2 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 200%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #f5e76a;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal2-content {
+  background-color: #f7b080;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid rgb(51, 255, 0);
+  width: 80%; /* Could be more or less, depending on screen size */
+  height: 115%; /* Full height */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #ff0000;
+  margin-bottom: 25px;
+}
+ 
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .deletebtn {
+     width: 100%;
+  }
+}
+
+
+
+
+input[type=text], select {
+  width: 75%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid rgb(109, 7, 7);
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #dbe9f8;
+}
+
+textarea {
+  width: 75%;
+  height: 200px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: #dbe9f8;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none;
+}
+
+
+
+
+
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid rgb(78, 46, 46);
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid rgb(247, 208, 208);
+  font-size: 18px;
+}
+
+.center {
+  margin: auto;
+  width: 60%;
+  /* border: 3px solid #73AD21; */
+  padding: 10px;
+}
+
+.center2 {
+  margin: auto;
+  width: 80%;
+  border: 4px solid #314144;
+  padding: 10px;
+  background-color: #e4cbee;
+  box-shadow: 3px 5px #bbb6b6;
+  
+}
+
+.modalMyho{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1200; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-size: 1000px;
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #004ff8;
+  padding-top: 50px;
+  opacity: 100%;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid rgb(255, 0, 0);
+  width: 80%; /* Could be more or less, depending on screen size */
+  height: 200%; /* Full height */
+}
+
+
+
+/* Modal Content/Box */
+.modal2-content {
+  background-color: #ffffff;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 10px solid rgb(95, 23, 73);
+  width: 75%; /* Could be more or less, depending on screen size */
+  height: auto; /* Full height */
+  padding-bottom: 50px;
+}
+
+    /* Darker background on mouse-over */
+    .btn:hover {
+  background-color: rgb(21, 62, 209);
+  color: rgb(248, 188, 225);
+}
+
+
+.btn2 {
+  background-color: RoyalBlue;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  height: 40px;
+  width: 40%;
+
+  margin: 0;
+  position: absolute;
+
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+/* Darker background on mouse-over */
+.btn2:hover {
+  background-color: rgb(13, 37, 110);
+  color: rgb(255, 255, 255);
+}
+
+.btnSearch {
+  background-color: rgb(65, 225, 86);
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  height: 47px;
+  width: 15%;
+}
+
+/* Darker background on mouse-over */
+.btnSearch:hover {
+  background-color: royalblue;
+  color: rgb(255, 255, 255);
+}
+</style>
+
+
+
+<br>
+<h2 style="font-size:300%; font-family: Georgia, 'Times New Roman', Times, serif;">LIST OF HEALTH ORGANISATION</h2>
+<input type="text" style="width:90%;" id="myInput" onkeyup="myFunction()" placeholder="Search Health Organisation" title="Type in a name"><br><br>
+
+
+
+
+<div class="table-wrapper">
+    <table id="myTable" class="fl-table">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>NAME</th>
+            <th>PHONE NUMBER</th>
+            <th>E-MAIL</th>
+            <th>WEBSITE</th>
+            <th>ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+          {% for item in posts %}
+            <tr>
+                <td></td>
+                <td>{{item.ho_name}}</td>
+                <td>{{item.ho_phoneNum}}</td>
+                <td>{{item.ho_email}}</td>
+                <td>{{item.ho_website}}</td>
+                <td>
+                    <button href="/update/{{item.ho_id}}" onclick="document.getElementById('idUpdate{{item.ho_id}}').style.display='block'" class="btn"><i class="fa fa-eye"></i></button>
+                    <!-- <button href="/delete_ho/{{item.ho_id}}" onclick="document.getElementById('idDelete{{item.ho_id}}').style.display='block'" class="btn"><i class="fa fa-trash"></i></button> -->
+                </td>
+            </tr>
+
+
+            
+            
+            <div id="idUpdate{{item.ho_id}}" class="modalMyho">
+              <form>
+                <div class="modal2-content">
+                  <br><h1 style='font-family: Hashed Browns ;font-size: 40px;color: rgb(0, 0, 0);'>{{ item.ho_name }}</h1><br><br>
+                  <span onclick="document.getElementById('idUpdate{{item.ho_id}}').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                  <div id="container">
+                    <img width="250" height="250" style="box-shadow: 10px 10px 10px grey;" src="{{ item.image1_img }}"><br><br><br>
+                    <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>PHONE NUMBER</p>
+                    <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(161, 109, 172);'>{{ item.ho_phoneNum }}</p><br>
+                    <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>ADDRESS</p>
+                    <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(202, 143, 156);'>{{ item.ho_address }}</p><br>
+                    <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>E-MAIL</p>
+                    <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(161, 109, 172);'>{{ item.ho_email }}</p><br>
+                    <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>WEBSITE</p>
+
+                    {% if item.ho_website != "None" %}
+                        <a href="{{ item.ho_website }}">
+                            <i><p style='text-align: center;font-family: "Gill Sans MT Condensed";font-size: 22px;color: rgb(202, 143, 156);'>
+                                Click Here to go to their Website
+                            </p></i>
+                        </a>
+                    {% else %}
+                        <i><p style='text-align: right;text-align: center;font-family: "Gill Sans MT Condensed";font-size: 22px;color: rgb(202, 143, 156);'>
+                            None
+                        </p></i>
+                    {% endif %}
+                    
+                    <br>
+                    <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(69, 74, 87);'>OPERATING HOUR</p>
+                    <p style='font-family: "Gill Sans MT Condensed";font-size: 25px;color: rgb(161, 109, 172);'>{{ item.ho_operatingHour }}</p><br>
+                    <br>
+                    <button class="btn2" type="button" onclick="document.getElementById('idUpdate{{item.ho_id}}').style.display='none'" >DONE</button>
+                    </div>
+                  </div>
+              </form>
+            </div>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<script>
+// Get the modal
+var modal1 = document.getElementById('id01');
+var modal2 = document.getElementById('id02');
+
+  // Get the modal
+  var modal = document.getElementById('id011');
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      td5 = tr[i].getElementsByTagName("td")[5];
+      td4 = tr[i].getElementsByTagName("td")[4];
+      td3 = tr[i].getElementsByTagName("td")[3];
+      td2 = tr[i].getElementsByTagName("td")[2];
+
+      if (td || td4 || td3) {
+        txtValue = td.textContent || td.innerText;
+        txtValue5 = td5.textContent || td5.innerText;
+        txtValue4 = td4.textContent || td4.innerText;
+        txtValue3 = td3.textContent || td3.innerText;
+        txtValue2 = td2.textContent || td2.innerText;
+
+        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue5.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+    
+  var table = document.getElementsByTagName('table')[0],
+  rows = table.getElementsByTagName('tr'),
+  text = 'textContent' in document ? 'textContent' : 'innerText';
+
+  for (var i = 1, len = rows.length; i < len; i++) {
+    rows[i].children[0][text] = i + rows[i].children[0][text];
+  }
+  
+  function fileValidation() {
+            var fileInput = 
+                document.getElementById('file');
+              
+            var filePath = fileInput.value;
+          
+            // Allowing file type
+            var allowedExtensions = 
+                    /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+              
+            if (!allowedExtensions.exec(filePath)) {
+                alert('Invalid file type');
+                fileInput.value = '';
+                return false;
+            } 
+            else 
+            {
+              
+                // Image preview
+                if (fileInput.files && fileInput.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.getElementById(
+                            'imagePreview').innerHTML = 
+                            '<center><img width="400" src="' + e.target.result
+                            + '"/></center>';
+                    };
+                      
+                    reader.readAsDataURL(fileInput.files[0]);
+                }
+            }
+        }
+        
+  function validateForm() {
+  let x = document.forms["myForm"]["update_image"].value;
+  let y = document.forms["myForm"]["image1"].value;
+
+  if (x == "") {
+    alert("Please click on 'Update Place's Image?' button to proceed.");
+    return false;
+  }
+  else if(y == "" && x == "YES"){
+    alert("Please click on 'Choose File' button to proceed with update image.");
+    return false;
+  }
+  else if(y != "" && x == "NO"){
+    alert("Please choose 'Yes' on 'Update Place's Image' to update the image !");
+    return false;
+  }
+  else{
+    alert("Details successfully updated.");
+  }
+}
+
+  function alert_delete() 
+  {    alert("Successfully Deleted!");  }
+
+  </script>
+{% endblock %}

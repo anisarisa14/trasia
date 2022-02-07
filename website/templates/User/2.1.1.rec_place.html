@@ -1,0 +1,346 @@
+{% extends "base.html" %} {% block title %}PLACE RECOMMENDATION{% endblock %} {% block
+    content %}
+
+<style>
+body {
+        margin:0;
+        padding:0;
+        font-family: sans-serif;
+        color: rgb(0, 0, 0);
+        background: linear-gradient(#9ebac5, #deaee4);
+      }
+
+div.gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+  height: 350px;
+  color:#8f055a;
+  background: white;
+  border-radius: 25px;
+}
+
+div.gallery:hover {
+  border: 1px solid #777;
+}
+
+div.gallery img {
+  width: 100%;
+  height: auto;
+}
+
+
+button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
+  background-color:white;
+}
+
+td{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 30px;
+  padding-right: 40px;
+  background-color:white;
+}
+
+.center2 {
+  margin: auto;
+  width: 100%;
+  padding: 10px;
+}
+
+input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 75%;
+  background: #f1f1f1;
+  margin:auto;
+}
+</style>
+
+
+<!-- #243b55 -->
+
+    <form method="POST">   
+    <div class="all-page-title page-breadcrumb">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="center2">
+                        <br><br>
+                        <h1 style="text-align:center; font-family: Agency FB;font-weight:bold;font-size: 43px; ">TOP &#128287; LOCAL PLACE RECOMMENDATION that are similar to</h1>
+                        <p style="text-align:center; font-family: Hashed Browns;font-size: 45px;"> 🏛️ {{search_name}} 🌴 </p>
+                        <br><br>
+                                                                        
+                </div></div></div></div></form>
+
+                <br>               
+
+                <body>
+                
+                <form method="POST" action="/rec_place_details">
+                <div class="gallery">
+                    <div class="desc">
+                    <table>
+                        
+                        <tr>
+                        <img class="rounded-circle" style="float: center;
+                            width:  120px;
+                            height: 120px;
+                            object-fit: cover;" src="{{ image[0] }}">                    
+                        </tr><tr><br><br></tr>
+                        <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[0]}}<br><br></div></tr>
+                        <tr>{{ place_keyword[0] }}</tr>
+                        <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[0] }}" hidden><br><br></tr>
+                        
+
+                        <div class="u-container-layout u-valign-middle">
+                            <button type="submit" class="button button2">MORE DETAILS</button>
+                        </div>
+                    </table>  
+                </div></div>
+                </form>
+                {% if place_name[1] != null %}
+                <form method="POST" action="/rec_place_details">
+                <div class="gallery">
+                    <div class="desc">
+                    <table>
+                        
+                        <tr>
+                            <img class="rounded-circle" style="float: center;
+                            width:  120px;
+                            height: 120px;
+                            object-fit: cover;" src="{{ image[1] }}">                    
+                        </tr><tr><br><br></tr>
+                        <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[1]}}<br><br></div></tr>
+                        <tr>{{ place_keyword[1] }}</tr>
+                        <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[1] }}" hidden><br><br></tr>
+                        
+
+                        <div class="u-container-layout u-valign-middle">
+                            <button type="submit" class="button button2">MORE DETAILS</button>
+                        </div>
+                    </table>  
+                </div></div>
+                </form>
+                {% endif %}
+                {% if place_name[2] != null %}
+                    <form method="POST" action="/rec_place_details">
+                    <div class="gallery">
+                        <div class="desc">
+                        <table>
+                            
+                            <tr>
+                                <img class="rounded-circle" style="float: center;
+                                width:  120px;
+                                height: 120px;
+                                object-fit: cover;"src="{{ image[2] }}">                    
+                            </tr><tr><br><br></tr>
+                            <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[2]}}<br><br></div></tr>
+                            <tr>{{ place_keyword[2] }}</tr>
+                            <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[2] }}" hidden><br><br></tr>
+                            
+
+                            <div class="u-container-layout u-valign-middle">
+                                <button type="submit" class="button button2">MORE DETAILS</button>
+                            </div>
+                        </table>  
+                    </div></div>
+                    </form>
+                {% endif %}
+                {% if place_name[3] != null %}
+                <form method="POST" action="/rec_place_details">
+                <div class="gallery">
+                    <div class="desc">
+                    <table>
+                        
+                        <tr>
+                            <img class="rounded-circle" style="float: center;
+                            width:  120px;
+                            height: 120px;
+                            object-fit: cover;" src="{{ image[3] }}">                    
+                        </tr><tr><br><br></tr>
+                        <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[3]}}<br><br></div></tr>
+                        <tr>{{ place_keyword[3] }}</tr>
+                        <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[3] }}" hidden><br><br></tr>
+                        
+
+                        <div class="u-container-layout u-valign-middle">
+                            <button type="submit" class="button button2">MORE DETAILS</button>
+                        </div>
+                    </table>  
+                </div></div>
+                </form>
+                {% endif %}
+                {% if place_name[4] != null %}
+                <form method="POST" action="/rec_place_details">
+                <div class="gallery">
+                    <div class="desc">
+                    <table>
+                        
+                        <tr>
+                            <img class="rounded-circle" style="float: center;
+                            width:  120px;
+                            height: 120px;
+                            object-fit: cover;" src="{{ image[4] }}">                    
+                        </tr><tr><br><br></tr>
+                        <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[4]}}<br><br></div></tr>
+                        <tr>{{ place_keyword[4] }}</tr>
+                        <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[4] }}" hidden><br><br></tr>
+                        
+
+                        <div class="u-container-layout u-valign-middle">
+                            <button type="submit" class="button button2">MORE DETAILS</button>
+                        </div>
+                    </table>  
+                </div></div>
+                </form>
+                {% endif %}
+                {% if place_name[5] != null %}
+                <form method="POST" action="/rec_place_details">
+                <div class="gallery">
+                    <div class="desc">
+                    <table>
+                        
+                        <tr>
+                            <img class="rounded-circle" style="float: center;
+                            width:  120px;
+                            height: 120px;
+                            object-fit: cover;" src="{{ image[5] }}">                    
+                        </tr><tr><br><br></tr>
+                        <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[5]}}<br><br></div></tr>
+                        <tr>{{ place_keyword[5] }}</tr>
+                        <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[5] }}" hidden><br><br></tr>
+                        
+
+                        <div class="u-container-layout u-valign-middle">
+                            <button type="submit" class="button button2">MORE DETAILS</button>
+                        </div>
+                    </table>  
+                </div></div>
+                </form>
+                {% endif %}
+                {% if place_name[6] != null %}
+                <form method="POST" action="/rec_place_details">
+                <div class="gallery">
+                    <div class="desc">
+                    <table>
+                        
+                        <tr>
+                            <img class="rounded-circle" style="float: center;
+                            width:  120px;
+                            height: 120px;
+                            object-fit: cover;" src="{{ image[6] }}">                    
+                        </tr><tr><br><br></tr>
+                        <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[6]}}<br><br></div></tr>
+                        <tr>{{ place_keyword[6] }}</tr>
+                        <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[6] }}" hidden><br><br></tr>
+                        
+
+                        <div class="u-container-layout u-valign-middle">
+                            <button type="submit" class="button button2">MORE DETAILS</button>
+                        </div>
+                    </table>  
+                </div></div>
+                </form>
+                {% endif %}
+                {% if place_name[7] != null %}
+                <form method="POST" action="/rec_place_details">
+                <div class="gallery">
+                    <div class="desc">
+                    <table>
+                        
+                        <tr>
+                            <img class="rounded-circle" style="float: center;
+                            width:  120px;
+                            height: 120px;
+                            object-fit: cover;" src="{{ image[7] }}">                    
+                        </tr><tr><br><br></tr>
+                        <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[7]}}<br><br></div></tr>
+                        <tr>{{ place_keyword[7] }}</tr>
+                        <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[7] }}" hidden><br><br></tr>
+                        
+
+                        <div class="u-container-layout u-valign-middle">
+                            <button type="submit" class="button button2">MORE DETAILS</button>
+                        </div>
+                    </table>  
+                </div></div>
+                </form>
+                {% endif %}
+                {% if place_name[8] != null %}
+                <form method="POST" action="/rec_place_details">
+                <div class="gallery">
+                    <div class="desc">
+                    <table>
+                        
+                        <tr>
+                            <img class="rounded-circle" style="float: center;
+                            width:  120px;
+                            height: 120px;
+                            object-fit: cover;" src="{{ image[8] }}">                    
+                        </tr><tr><br><br></tr>
+                        <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[8]}}<br><br></div></tr>
+                        <tr>{{ place_keyword[8] }}</tr>
+                        <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[8] }}" hidden><br><br></tr>
+                        
+
+                        <div class="u-container-layout u-valign-middle">
+                            <button type="submit" class="button button2">MORE DETAILS</button>
+                        </div>
+                    </table>  
+                </div></div>
+                </form>
+                {% endif %}
+                {% if place_name[9] != null %}
+                <form method="POST" action="/rec_place_details">
+                <div class="gallery">
+                    <div class="desc">
+                    <table>
+                        
+                        <tr>
+                            <img class="rounded-circle" style="float: center;
+                            width:  120px;
+                            height: 120px;
+                            object-fit: cover;" src="{{ image[9] }}">                    
+                        </tr><tr><br><br></tr>
+                        <tr><div style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; font-style: bold; font-size: 18px;">{{my_array_name[9]}}<br><br></div></tr>
+                        <tr>{{ place_keyword[9] }}</tr>
+                        <tr><input type="text" id="rec_id" name="rec_id" class="form-control" value="{{ my_array_id[9] }}" hidden><br><br></tr>
+                        
+
+                        <div class="u-container-layout u-valign-middle">
+                            <button type="submit" class="button button2">MORE DETAILS</button>
+                        </div>
+                    </table>  
+                </div></div>
+                </form>
+                {% endif %}
+
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                <br><br><br><br><br><br><br><br><br><br>
+                <button type="button" style="width:100%; height:50%; background:royalblue;color:white; font-family: Arial, Helvetica, sans-serif; font-size:14px;" onclick="history.back()">GO BACK</button><br><br>
+            
+
+</body>
+
+                
+
+{% endblock %}
