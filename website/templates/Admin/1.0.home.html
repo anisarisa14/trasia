@@ -1,0 +1,398 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+    %}
+
+
+
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif; background: linear-gradient(#eed3ec, #4d6785);}
+      * {box-sizing: border-box;}
+        
+        /* Button used to open the contact form - fixed at the bottom of the page */
+        .open-button {
+          background-color: #555;
+          color: white;
+          padding: 16px 20px;
+          border: none;
+          cursor: pointer;
+          opacity: 0.8;
+          position: fixed;
+          bottom: 23px;
+          right: 28px;
+          width: 280px;
+        }
+        
+        /* The popup form - hidden by default */
+        .form-popup {
+          display: none;
+          position: fixed;
+          bottom: 0;
+          right: 15px;
+          border: 3px solid #f1f1f1;
+          z-index: 9;
+        }
+        
+        /* Add styles to the form container */
+        .form-container {
+          max-width: 300px;
+          padding: 10px;
+          background-color: white;
+        }
+        
+        /* Full-width input fields */
+        .form-container input[type=text], .form-container input[type=password] {
+          width: 100%;
+          padding: 15px;
+          margin: 5px 0 22px 0;
+          border: none;
+          background: #f1f1f1;
+        }
+        
+        /* When the inputs get focus, do something */
+        .form-container input[type=text]:focus, .form-container input[type=password]:focus {
+          background-color: #ddd;
+          outline: none;
+        }
+        
+        /* Set a style for the submit/login button */
+        .form-container .btn {
+          background-color: #04AA6D;
+          color: white;
+          padding: 16px 20px;
+          border: none;
+          cursor: pointer;
+          width: 100%;
+          margin-bottom:10px;
+          opacity: 0.8;
+        }
+        
+        /* Add a red background color to the cancel button */
+        .form-container .cancel {
+          background-color: red;
+        }
+        
+        /* Add some hover effects to buttons */
+        .form-container .btn:hover, .open-button:hover {
+          opacity: 1;
+        }
+
+.dashbord{
+margin-top:30px;
+margin-right: 10px;
+display: inline-block;
+width:30%;
+color:#fff;
+border-radius: 3px;
+}
+.title-section{
+border-radius: 5px 5px 0px 0px;
+text-align: center;
+background-color:#7CD6F8;
+padding:7px 0px;
+}
+.title-section p{
+margin:0px;
+font-size:13px;
+}
+.icon-text-section{
+background-color:#5BCCF6;
+padding:5px 10px;
+}
+.icon-section{
+font-size:50px;
+float:left;
+width:20%;
+color:#8BDBF8;
+}
+.text-section{
+width:80%;
+float:right;
+text-align: right;
+}
+.text-section h1{
+margin:0px;
+font-size:25px;
+}
+.detail-section{
+background-color: #52B8DE;
+cursor: pointer;
+border-radius: 0px 0px 5px 5px;
+}
+.detail-section a{
+color:#fff;
+}
+.detail-section a p{
+display: inline-block;
+margin: 0px;
+font-size: 12px;
+padding:10px;
+}
+.detail-section a i{
+float:right;
+padding: 10px 5px 0px 0px;
+}
+.dashbord .detail-section:hover{
+background-color:#5a5a5a;
+}
+.download-content .title-section{
+background-color:#dabc7a;
+}
+.download-content .icon-text-section{
+background-color: #ffffff;
+}
+.download-content .detail-section{
+background-color: #bc9650;
+}
+.download-content .icon-section{
+color:#debd8a;
+}
+.place-content .title-section{
+background-color:#8779ff;
+}
+.place-content .icon-text-section{
+background-color:#ffffff;
+}
+.place-content .icon-section{
+color:#9b89ff;
+}
+.place-content .detail-section{
+background-color:#594fe6;
+}
+.ho-content .title-section{
+background-color:#ff7979;
+}
+.ho-content .icon-text-section{
+background-color:#ffffff;
+}
+.ho-content .icon-section{
+color:#ff8989;
+}
+.ho-content .detail-section{
+background-color:#e64f4f;
+}
+
+.admin-content .title-section{
+background-color:#396b729f;
+}
+.admin-content .icon-text-section{
+background-color:#ffffff;
+}
+.admin-content .icon-section{
+color:#396b7254;
+}
+.admin-content .detail-section{
+background-color:#396b72c4;
+}
+
+.user-content .title-section{
+background-color:#72395ca9;
+}
+.user-content .icon-text-section{
+background-color:#ffffff;
+}
+.user-content .icon-section{
+color:#70397254;
+}
+.user-content .detail-section{
+background-color:#723968c4;
+}
+
+table{
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 10px;
+  padding-bottom: 20px;
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+td{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 30px;
+  padding-right: 40px;
+  margin:auto;
+}
+</style>
+
+  <br>
+    <h2 align="center">WELCOME TO TRASIA'S ADMIN PAGE</h2>
+    
+    <div style="margin: auto;">
+            
+      <div class="dashbord place-content">
+        <div class="title-section">
+        <p style="font-size:20px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">TOTAL ATTRACTIONS : PLACES</p>
+        </div>
+
+        <div class="icon-text-section">
+          <div class="icon-section">
+            <i class="fas fa-globe-asia" aria-hidden="true" style="padding-left: 0.5em;"></i>
+          </div>
+          
+          <div class="text-section">
+            <div style="margin:auto; padding-right: 20%; padding-top: 0.5em;">
+              <h1 style="font-size:50px; font-family: Impact;color:rgb(0, 0, 0);">
+                510
+              </h1>
+            </div>
+          </div>
+
+          <div style="clear:both;"></div>
+        </div>
+
+        <div class="detail-section">
+          <a href="/view_place">
+            <p>View Detail</p>
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="dashbord download-content">
+        <div class="title-section">
+        <p style="font-size:20px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">TOTAL ATTRACTIONS : RESTAURANT</p>
+        </div>
+
+        <div class="icon-text-section">
+          <div class="icon-section">
+            <i class="fas fa-utensils" aria-hidden="true" style="padding-left: 0.5em;"></i>
+          </div>
+          
+          <div class="text-section">
+            <div style="margin:auto; padding-right: 20%; padding-top: 0.5em;">
+              <h1 style="font-size:50px; font-family: Impact;color:rgb(0, 0, 0);">
+                505
+              </h1>
+            </div>
+          </div>
+
+          <div style="clear:both;"></div>
+        </div>
+
+        <div class="detail-section">
+          <a href="/view_restaurant">
+            <p>View Detail</p>
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="dashbord ho-content">
+        <div class="title-section">
+        <p style="font-size:20px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">TOTAL HEALTH ORGANISATION</p>
+        </div>
+
+        <div class="icon-text-section">
+          <div class="icon-section">
+            <i class="fas fa-hospital" aria-hidden="true" style="padding-left: 0.5em;"></i>
+          </div>
+          
+          <div class="text-section">
+            <div style="margin:auto; padding-right: 20%; padding-top: 0.5em;">
+              <h1 style="font-size:50px; font-family: Impact;color:rgb(0, 0, 0);">
+                3
+              </h1>
+            </div>
+          </div>
+
+          <div style="clear:both;"></div>
+        </div>
+
+        <div class="detail-section">
+          <a href="/view_ho">
+            <p>View Detail</p>
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="dashbord admin-content">
+        <div class="title-section">
+        <p style="font-size:20px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">TOTAL ADMINS</p>
+        </div>
+
+        <div class="icon-text-section">
+          <div class="icon-section">
+            <i class="fas fa-user-secret" aria-hidden="true" style="padding-left: 0.5em;"></i>
+          </div>
+          
+          <div class="text-section">
+            <div style="margin:auto; padding-right: 20%; padding-top: 0.5em;">
+              <h1 style="font-size:50px; font-family: Impact;color:rgb(0, 0, 0);">
+                4
+              </h1>
+            </div>
+          </div>
+
+          <div style="clear:both;"></div>
+        </div>
+
+        <div class="detail-section">
+          <a href="/view_admin">
+            <p>View Detail</p>
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="dashbord user-content">
+        <div class="title-section">
+        <p style="font-size:20px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">TOTAL USERS</p>
+        </div>
+
+        <div class="icon-text-section">
+          <div class="icon-section">
+            <i class="far fa-user" aria-hidden="true" style="padding-left: 0.5em;"></i>
+          </div>
+          
+          <div class="text-section">
+            <div style="margin:auto; padding-right: 20%; padding-top: 0.5em;">
+              <h1 style="font-size:50px; font-family: Impact;color:rgb(0, 0, 0);">
+                6
+              </h1>
+            </div>
+          </div>
+
+          <div style="clear:both;"></div>
+        </div>
+
+        <div class="detail-section">
+          <a href="/view_user">
+            <p>View Detail</p>
+            <i class="fa fa-arrow-right" aria-hidden="true"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="container rounded bg-white mt-5 mb-5">
+      <div class="row">
+          <div class="col-md-3 border-right">
+              <div class="d-flex flex-column align-items-center text-center p-3 py-5"><img width="250" height="250" class="rounded-circle account-img" src="{{ user.image_file }}"><span class="font-weight-bold">{{user.name}}</span><span class="text-black-50">{{user.email}}</span><span> </span></div>
+          </div>
+          <div class="col-md-5 border-right">
+              <div class="p-3 py-5">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                      <h4 class="text-right">Your Profile</h4>
+                  </div>
+                  <div class="row mt-2">
+                      <div class="col-md-6"><label class="labels">Name</label><input type="text" class="form-control" value="{{user.name}}" readonly="readonly"></div>
+                  </div>
+                  <div class="row mt-3">
+                      <div class="col-md-12"><label class="labels">IC Number</label><input type="text" class="form-control" value="{{user.ic}}" disabled></div>
+                      <div class="col-md-12"><label class="labels">Gender</label><input type="text" class="form-control" value="{{user.gender}}" disabled></div>
+                      <div class="col-md-12"><label class="labels">Mobile Number</label><input type="text" class="form-control" value="{{user.phone_number}}" disabled></div>
+                      <div class="col-md-12"><label class="labels">Address</label><input type="text" class="form-control" value="{{user.address}}" disabled></div>
+                      <div class="col-md-12"><label class="labels">E-mail</label><input type="text" class="form-control" value="{{user.email}}" disabled></div>
+                      <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control" value="{{user.passwordOri}}" disabled></div>
+                      
+                    </div>
+              </div>
+          </div>          
+        </div>
+  </div>
+
+
+
+    {% endblock %}
