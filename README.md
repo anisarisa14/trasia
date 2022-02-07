@@ -1,2 +1,2 @@
-# trasia
-TRASIA Recommendation System using Content-based Filtering Algorithm
+# TRASIA
+ TRASIA Recommendation System Using Content-based Filtering Algorithm
