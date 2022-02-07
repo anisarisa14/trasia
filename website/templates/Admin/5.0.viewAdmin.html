@@ -1,0 +1,644 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content%}
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Add icon library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+<style>
+.btn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  height: 40px;
+}
+
+/* Darker background on mouse-over */
+.btn:hover {
+  background-color: RoyalBlue;
+  color: rgb(248, 188, 225);
+}
+
+
+.btn2 {
+  background-color: rgb(56, 255, 30);
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  height: 40px;
+  width: 75px;
+}
+
+/* Darker background on mouse-over */
+.btn2:hover {
+  background-color: RoyalBlue;
+  color: rgb(248, 188, 225);
+}
+
+
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+body{
+    font-family: Helvetica;
+    -webkit-font-smoothing: antialiased;
+    background: rgba(155, 80, 61, 0.644);
+}
+h2{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+
+/* Table Styles */
+.table-wrapper{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+   
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 4px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+    .fl-table {
+        display: block;
+        width: 100%;
+        margin-left: auto; 
+        margin-right: auto;
+    }
+    .table-wrapper:before{
+        content: "Scroll horizontally >";
+        display: block;
+        text-align: right;
+        font-size: 11px;
+        color: white;
+        padding: 0 0 1px;
+    }
+    .fl-table thead, .fl-table tbody, .fl-table thead th {
+        display: block;
+    }
+    .fl-table thead th:last-child{
+        border-bottom: none;
+    }
+    .fl-table thead {
+        float: left;
+    }
+    .fl-table tbody {
+        width: auto;
+        position: relative;
+        overflow-x: auto;
+    }
+    .fl-table td, .fl-table th {
+        padding: 20px .625em .625em .625em;
+        height: 60px;
+        vertical-align: middle;
+        box-sizing: border-box;
+        overflow-x: hidden;
+        overflow-y: auto;
+        width: 120px;
+        font-size: 13px;
+        text-overflow: ellipsis;
+    }
+    .fl-table thead th {
+        text-align: left;
+        border-bottom: 1px solid #f7f7f9;
+    }
+    .fl-table tbody tr {
+        display: table-cell;
+    }
+    .fl-table tbody tr:nth-child(odd) {
+        background: none;
+    }
+    .fl-table tr:nth-child(even) {
+        background: transparent;
+    }
+    .fl-table tr td:nth-child(odd) {
+        background: #F8F8F8;
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tr td:nth-child(even) {
+        border-right: 1px solid #E6E4E4;
+    }
+    .fl-table tbody td {
+        display: block;
+        text-align: center;
+    }
+}
+
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+.container {
+  padding: 1px;
+  text-align: center;
+}
+
+
+
+.modalMyho{
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1200; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-size: 1000px;
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #004ff8;
+  padding-top: 50px;
+  opacity: 100%;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid rgb(255, 0, 0);
+  width: 80%; /* Could be more or less, depending on screen size */
+  height: 100%; /* Full height */
+}
+
+/* The Modal (background) */
+.modal2 {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 300%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #f5e76a;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal2-content {
+  background-color: #ffffff;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 2px solid rgb(4, 18, 97);
+  width: 80%; /* Could be more or less, depending on screen size */
+  height: auto; /* Full height */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #ff0000;
+  margin-bottom: 25px;
+}
+ 
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .deletebtn {
+     width: 100%;
+  }
+}
+
+
+
+
+input[type=text], input[type=password], select {
+  width: 75%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 2px solid rgb(109, 7, 7);
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #dbe9f8;
+}
+
+textarea {
+  width: 75%;
+  height: 200px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid rgb(0, 0, 0);
+  background-color: #dbe9f8;
+  border-radius: 4px;
+  font-size: 16px;
+  resize: none;
+}
+
+
+
+
+
+
+
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in ho */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 125%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 125%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid rgb(78, 46, 46);
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid rgb(247, 208, 208);
+  font-size: 18px;
+}
+
+
+</style>
+
+
+
+<br>
+<h2 style="font-size:300%; font-family: Georgia, 'Times New Roman', Times, serif;">LIST OF ADMIN</h2>
+<input type="text" style="width:90%;" id="myInput" onkeyup="myFunction()" placeholder="Search User" title="Type in a name"><br><br>
+
+
+
+
+<div class="table-wrapper">
+    <table id="myTable" class="fl-table">
+        <thead>
+        <tr>
+            <th>No.</th>
+            <th>NAME</th>
+            <th>USER'S ID</th>
+            <th>PHONE NUMBER</th>
+            <th>E-MAIL</th>
+            <th>GENDER</th>
+            <th>STATUS</th>
+            <th>ACTION</th>
+        </tr>
+        </thead>
+        <tbody>
+          {% for item in posts %}
+            <tr>
+                <td></td>
+                <td>{{item.name}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.phone_number}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.gender}}</td>                
+                <td>{{item.status}}</td>
+                <td>
+                    <button href="/update/{{item.id}}" onclick="document.getElementById('idUpdate{{item.id}}').style.display='block'" class="btn"><i class="fa fa-eye"></i></button>
+                    <button href="/delete/{{item.id}}" onclick="document.getElementById('idDelete{{item.id}}').style.display='block'" class="btn"><i class="fa fa-refresh"></i></button>
+                </td>
+            </tr>
+
+
+            
+            
+            <div id="idUpdate{{item.id}}" class="modalMyho">
+              <form action="update_admin" method="POST">
+                <div class="modal2-content">
+                  <h1>ADMIN'S DETAILS</h1>
+                  <i>View the admin's details</i>
+                  <span onclick="document.getElementById('idUpdate{{item.id}}').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                  <div id="container">
+                    
+                    
+                    <br><br><br>
+                    <div>
+                      <label>ADMIN'S PROFILE IMAGE</label><br>
+                      <img width="250" height="250" class="rounded-circle account-img" src="{{ item.image_file }}">
+                      <input type="text" id="imageLama" name="imageLama" value="{{ item.image_file }}" hidden>
+                    </div>
+                    <br><br>
+                    <div>
+                      <label>ADMIN'S ID</label><br>
+                      <input type="text" name="id" value="{{item.id}}" disabled>
+                    </div>
+                    <div>
+                      <label>NAME</label><br>
+                      <input type="text" name="name" value="{{item.name}}" disabled>
+                    </div>
+                    <div>
+                      <label>I/C / PASSPORT NUMBER</label><br>
+                      <input type="text" name="ic" value="{{item.ic}}" disabled>
+                    </div>
+                    <div>
+                      <label>GENDER</label><br>
+                      <input type="text" name="gender" value="{{item.gender}}" disabled>
+                    </div>
+                    <div>
+                      <label>ADDRESS</label><br>
+                      <input type="text" name="address" value="{{item.address}}" disabled>
+                    </div>
+                    <div>
+                      <label>PHONE NUMBER</label><br>
+                      <input type="text" name="phonenumber" value="{{item.phone_number}}" disabled>
+                    </div>
+                    <div>
+                      <label>E-MAIL</label><br>
+                      <input type="text" name="email" value="{{item.email}}" disabled>
+                    </div>
+                    <div>
+                      <label>PASSWORD ORI</label><br>
+                      <input type="text" name="password" value="{{item.passwordOri}}" disabled>
+                    </div>
+                    <div>
+                        <label>STATUS</label><br>
+                        <input type="text" name="status" value="{{item.status}}" disabled>
+                    </div>
+                    <br><br>
+                    <div>
+                        <button class="btn2" type="button" onclick="document.getElementById('idUpdate{{item.id}}').style.display='none'" >CANCEL</button>
+                        <!-- <button class="btn2" type="submit" class="deletebtn" onclick="alert_update()">UPDATE</button> -->
+                      </div>
+                    </div><br><br>
+                  </div>
+              </form>
+            </div>
+
+
+            <div id="idDelete{{item.id}}" class="modalMyho">
+                <form action="delete_admin" method="POST">
+                  <div class="modal2-content">
+                    <h1>INACTIVATE ADMIN ?</h1>
+                    <i>You are only allowed to activate or inactivate the admin status</i>
+                    <span onclick="document.getElementById('idUpdate{{item.id}}').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+                    <div id="container">
+                      
+                      
+                      <br><br>
+                      <div>
+                        <label>ADMIN'S PROFILE IMAGE</label><br>
+                        <img width="250" height="250" class="rounded-circle account-img" src="{{ item.image_file }}">
+                        <input type="text" id="imageLama" name="imageLama" value="{{ item.image_file }}" hidden>
+                      </div>
+                      <br><br>
+                      <div>
+                        <label>ADMIN'S ID</label><br>
+                        <input type="text" name="id" value="{{item.id}}" disabled>
+                      </div>
+                      <div>
+                        <label>NAME</label><br>
+                        <input type="text" name="name" value="{{item.name}}" disabled>
+                      </div>
+                      <div>
+                        <label>I/C / PASSPORT NUMBER</label><br>
+                        <input type="text" name="ic" value="{{item.ic}}" disabled>
+                      </div>
+                      <div>
+                        <label>GENDER</label><br>
+                        <input type="text" name="gender" value="{{item.gender}}" disabled>
+                      </div>
+                      <div>
+                        <label>ADDRESS</label><br>
+                        <input type="text" name="address" value="{{item.address}}" disabled>
+                      </div>
+                      <div>
+                        <label>PHONE NUMBER</label><br>
+                        <input type="text" name="phonenumber" value="{{item.phone_number}}" disabled>
+                      </div>
+                      <div>
+                        <label>E-MAIL</label><br>
+                        <input type="text" name="email" value="{{item.email}}" readonly>
+                      </div>
+                      <div>
+                        <label>PASSWORD ORI</label><br>
+                        <input type="text" name="password" value="{{item.passwordOri}}" disabled>
+                      </div>
+                      <div>
+                          <label>STATUS</label><br>
+                          <input type="text" name="status" id="status" value="{{item.status}}" readonly>
+                      </div>
+                      <br><div>
+                        <button class="btn2" type="button" onclick="document.getElementById('idDelete{{item.id}}').style.display='none'" >CANCEL</button>
+                        <button class="btn2" type="submit" class="deletebtn" onclick="alert_delete()">CONFIRM</button>
+                      </div>
+                      </div><br><br>
+                    </div>
+                </form>
+              </div>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+<script>
+
+var status = document.getElementById("status").value;
+
+// Get the modal
+var modal1 = document.getElementById('id01');
+var modal2 = document.getElementById('id02');
+
+  // Get the modal
+  var modal = document.getElementById('id011');
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+
+
+  function myFunction() {
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      td4 = tr[i].getElementsByTagName("td")[4];
+      td3 = tr[i].getElementsByTagName("td")[3];
+      td2 = tr[i].getElementsByTagName("td")[2];
+
+
+      if (td || td4 || td2 || td3) {
+        txtValue = td.textContent || td.innerText;
+        txtValue4 = td4.textContent || td4.innerText;
+        txtValue2 = td2.textContent || td2.innerText;
+        txtValue3 = td3.textContent || td3.innerText;
+
+        if (txtValue.toUpperCase().indexOf(filter) > -1 || txtValue4.toUpperCase().indexOf(filter) > -1 || txtValue2.toUpperCase().indexOf(filter) > -1 || txtValue3.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }       
+    }
+  }
+  
+  var table = document.getElementsByTagName('table')[0],
+  rows = table.getElementsByTagName('tr'),
+  text = 'textContent' in document ? 'textContent' : 'innerText';
+
+for (var i = 1, len = rows.length; i < len; i++) {
+  rows[i].children[0][text] = i + rows[i].children[0][text];
+}
+
+    function alert_update() 
+  {    alert("Successfully Updated!");  }
+
+  function alert_delete() 
+  {    
+    if(status == "ACTIVE")
+    {  alert("Successfully Inactivate the Admin!");  }
+    else
+    {  alert("Successfully Activate the Admin!");  }
+
+  }
+
+  </script>
+{% endblock %}
